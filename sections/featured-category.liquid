@@ -1,0 +1,70 @@
+<section class="product-category">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title text-center">
+          <h2>Fetured Category</h2>
+        </div>
+      </div>
+
+      <div class="category-block">
+        {% for block in section.blocks %}
+        <div class="category-box">
+          <a href="{{ block.settings.cat_link }}">
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="">
+            <div class="content">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.sub_title }}</p>
+            </div>
+          </a>  
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+  {
+    "name":"Featured Category",
+    "max_blocks":3,
+    "blocks":[
+      {
+        "type":"content",
+        "name":"Category Block",
+
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Category Image"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Category Title"
+          },
+          {
+            "type":"text",
+            "id":"sub_title",
+            "label":"Category Sub Title"
+          },
+          {
+            "type":"url",
+            "id":"cat_link",
+            "label":"Category Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Category",
+        "category":"Home"
+      }
+    ]
+  }
+{% endschema %}

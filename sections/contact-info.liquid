@@ -1,0 +1,50 @@
+<ul class="contact-short-info list-unstyled">
+  <li>
+    {% if section.settings.address %}
+    <i class="fa fa-home fa-lg"></i>
+    <span>{{ section.settings.address }}</span>
+    {% endif %}
+  </li>
+  <li>
+    {% if section.settings.phone %}
+    <i class="fa fa-mobile fa-lg"></i>
+    <span>{{ section.settings.phone }}</span>
+    {% endif %}
+  </li>
+  <li>
+     {% if section.settings.email %}
+    <i class="fa fa-envelope-o"></i>
+    <span>{{ section.settings.email }}</span>
+    {% endif %}
+  
+  </li>
+</ul>
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Contact Info"
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default":"Khaja Road, Bayzid, Chittagong, Bangladesh"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default":"Phone: +880-31-000-000"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default":"hello@example.com"
+    }
+  ]
+}
+{% endschema %}

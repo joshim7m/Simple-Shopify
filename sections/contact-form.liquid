@@ -1,0 +1,40 @@
+{% form 'contact' %}
+	{% if form.posted_successfully? %}
+		<p class="note form-success">{{ section.settings.message }}</p>
+	{% endif %}
+  <div class="form-group">
+    <input type="text" placeholder="Your Name" class="form-control" name="contact[name]" id="name">
+  </div>
+  
+  <div class="form-group">
+    <input type="email" placeholder="Your Email" class="form-control" name="contact[email]" id="email">
+  </div>
+  
+  <div class="form-group">
+    <input type="text" placeholder="Subject" class="form-control" name="contact[subject]" id="subject">
+  </div>
+  
+  <div class="form-group">
+    <textarea rows="6" placeholder="Message" class="form-control" name="contact[message]" id="message"></textarea> 
+  </div>
+
+  <div>
+    <input type="submit" id="contact-submit" class="btn btn-transparent" value="Submit">
+  </div>
+{% endform %}
+
+{% schema %}
+{
+  "name": {
+    "en": "Welcome Message"
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Welcome Message",
+      "default":"Thank you for contacting us"
+    }
+  ]
+}
+{% endschema %}

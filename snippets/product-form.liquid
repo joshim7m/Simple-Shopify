@@ -1,0 +1,34 @@
+
+<form action="/cart/add" method="post">
+ {% unless product.has_only_default_variant %}
+
+    {% for product_option in product.options_with_values %}
+      <div class="product-category">
+        <span>{{ product_option.name }}</span>
+        <select class="form-control" data-index="option{{ forloop.index }}">
+          {% for value in product_option.values %}
+            <option value="{{ value | escape }}" {% if product_option.selected.value == value %} selected="selected" {% endif %}>
+              {{value}}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endfor %}
+  {% endunless %}
+
+  <div class="product-quantity">
+    <span>Quantity:</span>
+    <input min="1" type="number" id="quantity" name="quantity" value="1" />
+  </div>
+  <div class="product-category">
+    <span>Categories:</span>
+    <ul>
+      {% for collection in product.collections %}
+        <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  <input type="hidden" id="variant-id" name="id" value="{{ product.variants.first.id }}">
+  <input type="submit" class="btn btn-main" value="Add to Cart">
+</form>

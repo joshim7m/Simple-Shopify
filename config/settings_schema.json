@@ -1,0 +1,51 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Themekit template theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://github.com/Shopify/themekit",
+    "theme_support_url": "https://github.com/Shopify/themekit/issues"
+  },
+  {
+    "name":"general",
+    "settings": [
+      {
+        "type":"header",
+        "content":"Logo Option"
+      },
+      {
+        "type":"color",
+        "id":"text_color",
+        "label":"Text Color (example)",
+        "default":"#ccc"
+      },
+      {
+        "type":"checkbox",
+        "id":"use_logo",
+        "label":"Use Custom Logo"
+      },
+      {
+        "type":"image",
+        "id":"logo.png",
+        "label":"Custom Logo",
+        "max-width": 400,
+        "max-height": 200
+      },
+      {
+        "type":"paragraph",
+        "content":"Maximum logo dimensions are 400 x 200"
+      }
+    ]
+  },
+  {
+    "name":"About Page",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"about_image",
+        "label":"About Page Image"
+      }
+    ]
+  }
+]

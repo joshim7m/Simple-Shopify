@@ -1,0 +1,106 @@
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content">
+          <h1 class="page-name">{{ collection.title }}</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">{{ collection.title }}</a></li>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="products section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="widget">
+          <h4 class="widget-title">Sort By</h4>
+        </div>
+
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5>
+                <a href="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Shirts
+                </a>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <ul class="list-unstyled">
+                  <li><a href="">T-Shirts</a></li>
+                  <li><a href="">Polos</a></li>
+                  <li><a href="">Longsleeve</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="row">
+
+          {% paginate collection.products by 6 %}
+
+            {% for product in collection.products %}
+              <div class="col-md-4">
+                <div class="product-item">
+                  <div class="product-thumb">
+                    {% if product.compare_at_price and product.compare_at_price != product.price %}
+                    <span class="bage">Sale</span>
+                    {% endif %}
+                    <img class="img-responsive" src="{{ product.featured_image.src | img_url: 'master' }}" alt="product-img">
+                    <div class="preview-meta">
+                      <ul>
+                        <li>
+                          <a href="{{ product.url }}"><i class="fa fa-eye"></i></a>
+                        </li>
+                        <li>
+                          <form action="/cart/add" method="post" id="form-{{product.handle}}">
+                            <input type="hidden" name="id" value="{{product.variants.first.id}}">
+                          </form>
+                          <a onclick="document.getElementById('form-{{product.handle}}').submit()" ><i class="fa fa-shopping-cart"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product-content">
+                    <h4><a href="{{ product.url }}">{{ product.title }}</a></h4>
+                    <p class="price">{{ product.price }}</p>
+                  </div>
+                </div>
+              </div>
+
+            {% else %}
+              <div class="col-md-12">
+                <h2 class="text-center">Not Found</h2>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="row"> 
+            {% if paginate.pages > 1 %}
+              <div class="col-md-12 ">
+                <div class="pagination">
+                {{ paginate | default_pagination }}
+              </div>
+              </div>
+            {% endif %}
+          {% endpaginate %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
