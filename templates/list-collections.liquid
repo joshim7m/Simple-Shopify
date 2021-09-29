@@ -1,0 +1,52 @@
+
+    <section class="page-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="content d-flex justify-content-center">
+           <div>
+           	 <h1 class="page-name"> Our Exclusive Collections </h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">All Collection</li>
+              </ol>
+            </nav>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="container my-5">
+	<div class="row">
+		{% for collection in collections %}
+     <div class="col-md-6">
+
+     	<div class="card mb-3">
+			  <div class="row g-0">
+			    <div class="col-md-4">
+			      <a href="{{collection.url}}">
+			      	<img class="img-fluid" src="{{ collection.featured_image | img_url: '520x' }}" alt="">
+			      </a>
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h5 class="card-title"><a href="{{ collection.url }}">{{ collection.title }}</a></h5>
+			        <p class="card-text">
+			        	{{ collection.description }}
+			        </p>
+			        <p class="card-text"><small class="text-muted"> {{ collection.products_count }} items in collection</small></p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+
+      
+     <h4></h4>
+     </div>
+		{% endfor %}
+	</div>
+</div>

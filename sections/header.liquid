@@ -1,47 +1,124 @@
-
-  <section class="top-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 col-xs-12 col-sm-4">
-          <div class="contact-number">
-            <i class="fa fa-phone"></i>
-            <span>0129- 12323-123123</span>
-          </div>
+    
+<header id="header" class="header">
+  <div class="container">
+    <div class="row d-lg-none">
+      <div class="brand-mobile text-center">
+        <img src="{{ 'logo-small.png' | asset_img_url: 'master' }}" alt="">
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="header__brand">
+          <img src="{{ 'logo-small.png' | asset_img_url: 'master' }}" alt="">
         </div>
-
-        <div class="col-md-4 col-xs-12 col-sm-4">
-          <!-- Site Logo -->
-          <div class="logo text-center">
-            <a href="/">
-              <!-- replace logo here -->
-              <svg width="205px" height="29px" viewBox="0 0 155 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="40" font-family="AustinBold, Austin" font-weight="bold">
-                  <g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
-                    <text id="fashion">
-                      <tspan x="108.94" y="325">FLYZANE</tspan>
-                    </text>
-                  </g>
-                </g>
-              </svg>
-            </a>
+      </div>
+      <div class="col-6 d-flex justify-content-lg-center">
+        <div class="header__menu">
+          <div class="menu-trigger d-lg-none">
+            <i data-feather="menu"></i>
           </div>
-        </div>
-        <div class="col-md-4 col-xs-12 col-sm-4">
-          <ul class="top-menu list-inline float-right">
-            <li class="list-inline-item"><a href="/cart"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+          <nav class="mobile-nav d-lg-none">
+            <div class="mobile-nav__header">
+              <i class="nav-close" data-feather="x"></i>
+            </div>
+            <div class="mobile-nav__body">
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li class="has-sub"><a href="#">Shop</a>
+                  <ul class="dropdown-box">
+                    <li><a href="#">Grocery</a></li>
+                    <li><a href="#">Vegetables</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+          </nav>
 
-            {% if shop.customer_accounts_enabled %}
-              {% if customer %}
-                <li class="list-inline-item"><a href="/account"><i class="fa fa-sign-in"></i>Your Account</a></li>
-                <li class="list-inline-item"><a href="/sing-out"><i class="fa fa-sign-out"></i>Sing Out</a></li>
-              {% else %}
-                <li class="list-inline-item"><a href="/account/login"><i class="fa fa-sign-in"></i>Login</a></li>
-              {% endif %}
-            {% endif %}
-          </ul>
+          <nav class="main-nav d-none d-lg-block">
+            <ul>
+              <li><a href="#">Home</a></li>
+               <li class="has-sub"><a href="#">Shop</a>
+                  <!-- <ul class="dropdown-box">
+                    <li><a href="#">Grocery</a></li>
+                    <li><a href="#">Vegetables</a></li>
+                  </ul> -->
+                </li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="header__ecom_icons d-flex justify-content-end">
+          <a id="search-trigger" href="javascript:void(0)">
+            <i data-feather="search"></i>
+          </a>
+          <a id="user" class="d-none d-lg-block" href="javascript:void(0)">
+            <i data-feather="user"></i>
+          </a>
+          <a id="cartDrawer-trigger" class="d-none d-lg-block" href="javascript:void(0)">
+            <i data-feather="shopping-bag"></i>
+          </a>
         </div>
       </div>
     </div>
-  </section>
 
-  {% render 'header-menu' %}
+<!--     ECOMMERCE SEARCH BOX -->
+
+    <div class="search-box" class="d-md-none">
+      <div class="search-box__header">
+        <h4>Search for products</h4>
+        <i id="search-box-close" data-feather="x"></i>
+      </div>
+      <div class="search-box__body">
+        <div class="search-form">
+          <form action="">
+            <input type="text" placeholder="Search..">
+            <button type="submit"><i data-feather="search"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<!--     ECOMMERCE CART DRAWER -->
+
+    <div class="cartDrawer">
+      <div class="cartDrawer__header">
+        <h4>Search for products</h4>
+        <i id="cartDrawer-close" data-feather="x"></i>
+      </div>
+      <div class="cartDrawer__body">
+        <h4>Cart Item</h4>
+      </div>
+      <div class="cartDrawer__footer">
+        <p>cart footer</p>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+
+
+{% schema %}
+  {
+    "name": {
+      "en": "Header"
+    },
+    "settings":[
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "en": "Upload Logo"
+      }
+    }
+  ]
+}
+{% endschema %}

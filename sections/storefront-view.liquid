@@ -1,0 +1,80 @@
+<section class="storefront">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="storefront__store-image" style="background-image: url('{{ 'bg-fill-circle.png' | asset_img_url: 'master' }}');">
+          <img class="img-fluid" src="{{ section.settings.store_img | img_url:'master' }}" alt="">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="storefront__content">
+          <h2>We have quality products for a better life</h2>
+          <p>Visit us now! we have a large selection of African food and cosmetics in our online shop. What are you waiting for?</p>
+
+          <div class="content__payment">
+            <h6>Flexible Payment</h6>
+            <div class="payment-picture">
+              {% for block in section.blocks %}
+                <img src="{{ block.settings.icon | img_url: 'master' }}" alt="">
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": {
+      "en": "Front View"
+    },
+    "settings":[
+    {
+      "type": "image_picker",
+      "id": "store_img",
+      "label": {
+        "en": "Store Image"
+      }
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "We have quality products for a better life",
+      "label": {
+        "en": "Title"
+      }
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "default": "<p>Visit us now! we have a large selection of African food and cosmetics in our online shop. What are you waiting for?</p>",
+      "label": {
+        "en": "Content"
+      }
+    }  
+  ],
+
+  "max_blocks": 5,
+  "blocks":[
+     {
+       "type": "payment-icon",
+       "name": "Payment Icon",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "icon",
+           "label": "Pyament Icon"
+         }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Front View"
+    }
+  ]
+}
+{% endschema %}

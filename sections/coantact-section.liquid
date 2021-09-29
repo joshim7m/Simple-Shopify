@@ -1,0 +1,82 @@
+<section class="contact-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="google-map-wrapper">
+          <img class="img-fluid" src="{{ section.settings.image | img_url: '605x' }}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="contact-detail-wrapper">
+          <div class="contact-detail">
+          <div class="contact-detail__contact-block">
+            <span class="contact-head"><i data-feather="clock"></i> Opening Hours</span>
+            <span class="contact-footer">{{ section.settings.opening_hours }}</span>
+          </div>
+
+           <div class="contact-detail__contact-block">
+            <span class="contact-head"><i data-feather="map-pin"></i> Address</span>
+            <span class="contact-footer">{{ section.settings.address }}</span>
+          </div>
+
+           <div class="contact-detail__contact-block">
+            <span class="contact-head"><i data-feather="phone"></i> Phone</span>
+            <span class="contact-footer">{{ section.settings.phone }}</span>
+          </div>
+
+           <div class="contact-detail__contact-block">
+            <span class="contact-head"><i data-feather="mail"></i> E-mail</span>
+            <span class="contact-footer">{{ section.settings.email }}</span>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Contact Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "opening_hours",
+      "label": "Opening Hours",
+      "default": "MON – SAT: 10:00am – 20:00pm"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Shop Address",
+      "default": "7/d, Sec-09, Uttara, Dhaka-1212"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Number",
+      "default": "01560 70 444 99"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address",
+      "default": "hello@outletzane.com"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Contact Section",
+      "category": "Home"
+    }
+  ]
+}
+{% endschema %}

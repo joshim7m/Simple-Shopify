@@ -8,43 +8,56 @@
     "theme_support_url": "https://github.com/Shopify/themekit/issues"
   },
   {
-    "name":"general",
+  "name": {
+      "en": "Colors"
+    },
     "settings": [
       {
-        "type":"header",
-        "content":"Logo Option"
+        "type": "header",
+        "content": {
+          "en": "Text"
+        }
       },
       {
-        "type":"color",
-        "id":"text_color",
-        "label":"Text Color (example)",
-        "default":"#ccc"
+        "type": "color",
+        "id": "color_text",
+        "label": {
+          "en": "Headings and links"
+        },
+        "default": "#3a3a3a"
       },
       {
-        "type":"checkbox",
-        "id":"use_logo",
-        "label":"Use Custom Logo"
+        "type": "color",
+        "id": "color_body_text",
+        "label": {
+          "en": "Body text"
+        },
+        "default": "#333232"
       },
       {
-        "type":"image",
-        "id":"logo.png",
-        "label":"Custom Logo",
-        "max-width": 400,
-        "max-height": 200
-      },
-      {
-        "type":"paragraph",
-        "content":"Maximum logo dimensions are 400 x 200"
+        "type": "color",
+        "id": "color_body_bg",
+        "label": {
+          "en": "Background"
+        },
+        "default": "#ffffff"
       }
     ]
   },
   {
-    "name":"About Page",
+    "name": {
+      "en": "Favicon"
+    },
     "settings": [
       {
-        "type":"image_picker",
-        "id":"about_image",
-        "label":"About Page Image"
+        "type": "image_picker",
+        "id": "favicon",
+        "label": {
+          "en": "Favicon image"
+        },
+        "info": {
+          "en": "Will be scaled down to 32 x 32px"
+        }
       }
     ]
   }

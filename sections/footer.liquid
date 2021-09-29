@@ -1,65 +1,91 @@
-<footer class="footer section text-center">
+<footer class="footer">
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="social-media">
-          <li>
-            <a href="">
-              <i class="fa fa-facebook-f"></i>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="fa fa-instagram"></i>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="fa fa-pinterest"></i>
-            </a>
-          </li>
-        </ul>
-        <ul class="footer-menu">
-          <li>
-            <a href="">Contact</a>
-          </li>
-          <li>
-            <a href="">SHIPPING</a>
-          </li>
-          <li>
-            <a href="">TERMS OF SERVICE</a>
-          </li>
-          <li>
-            <a href="">PRIVACY POLICY</a>
-          </li>
-        </ul>
-        <p class="copyright-text">Copyright &#9400; Fashion</p>
+    <div class="footer__top">
+      <div class="row">
+        <div class="col d-none d-lg-block">
+        <div class="footer-logo">
+          <img src="{{ 'logo-large.png' | asset_img_url: 'master' }}" alt="">
+        </div>
+      </div>
+      <div class="col">
+       <div class="footer_payment">
+          <div class="footer_payment__picture">
+            <img src="{{ 'visa.png' | asset_img_url: 'master' }}" alt="">
+            <img src="{{ 'mastercard.png' | asset_img_url: 'master' }}" alt="">
+            <img src="{{ 'klarna.png' | asset_img_url: 'master' }}" alt="">
+            <img src="{{ 'paypal.png' | asset_img_url: 'master' }}" alt="">
+            <img src="{{ 'sofort.png' | asset_img_url: 'master' }}" alt="">
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="row">
+        {% render 'footer-menus' %}
+        {% render 'footer-newsletter' %}
+       
       </div>
     </div>
   </div>
 </footer>
 
-{% schema %}
-{
-  "name":"Footer",
-  "max_blocks":3,
-  "blocks":[
-    {
-      "type":"content",
-      "name":"Footer Block",
+<section class="copyright">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="text-center mb-0">&copy;{{ section.settings.copyright }}</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      "settings":[
-        {
-          "type":"text",
-          "id":"social",
-          "label":"Social Icons"
-        }
-      ]
+<div class="footer-bar d-lg-none">
+  <div class="footer-bar__icon-wrapper">
+    <div id="footer-home" class="footer-bar-icon"><i data-feather="home"></i></div>
+    <div id="footer-fav" class="footer-bar-icon"><i data-feather="heart"></i></div>
+    <div id="footer-shop" class="footer-bar-icon"><i data-feather="shopping-cart"></i></div>
+  </div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": {
+      "en": "Footer"
+    },
+    "settings":[
+    {
+      "type": "text",
+      "id": "menu1_title",
+      "label": "First Menu Title",
+      "default": "Top Categories"
+    },
+    {
+      "type": "text",
+      "id": "menu2_title",
+      "label": "Second Menu Title",
+      "default": "Help"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Title",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter Text",
+      "default": "Subscribe to our newsletter and get informed about discounted offers"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright Text",
+      "default": "Copyright 2021 Dokan"
     }
   ]
 }

@@ -1,0 +1,53 @@
+<section class="categories">
+  <div class="container">
+    <div class="row">
+      <h2 class="text-center">Explore Our Different Categories</h2>
+    </div>
+    <div class="row py-3">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="categories__item" style="background-image: #f5f5f5;">
+          <h4 class="category-name">All Products</h4>
+          <img src="{{ 'category-all.png' | asset_img_url: '155x' }}" alt="" class="category-img">
+        </div>
+      </div>
+
+      {% for collection in collections %}
+        {% if collection.image %}
+          {% assign collection_image = collection.image %}
+        {% elsif collection.products.first and collection.products.first.images != empty %}
+          {% assign collection_image = collection.products.first.featured_image %}
+        {% else %}
+          {% assign collection_image = blank %}
+        {% endif %}
+      <div class="col-md-6 col-lg-4">
+        <div class="categories__item" style="background-image: #f5f5f5;">
+          <h4 class="category-name"><a href="{{ collection.url }}">{{ collection.title }}</a></h4>
+          <img src="{{ collection_image | img_url: '115x' }}" alt="" class="category-img">
+        </div>
+      </div>
+
+      {% endfor %}
+
+    
+    </div>
+  </div>
+</section>
+
+
+
+
+{% schema %}
+{
+  "name": "Top Categories",
+  "settings": [
+
+  ],
+  "presets": [
+    {
+      "name": "Top Categories",
+      "category": "Home"
+    }
+  ]
+}
+{% endschema %}

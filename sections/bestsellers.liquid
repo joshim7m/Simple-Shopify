@@ -1,0 +1,60 @@
+<section class="bestsellers">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col">
+        <h4>Best Sellers</h4>
+      </div>
+      <div class="col">
+        <div class="carousel-arrows text-end">
+          <i data-feather="arrow-left-circle"></i>
+          <i data-feather="arrow-right-circle"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="bestsellers__row">
+
+      {% for product in section.settings.best_collection.products %}
+      
+      <div class="bestsellers__item">
+        <div class="bestsellers__product-image">
+          <img src="{{ product.featured_image | img_url: '144x' }}" alt="">
+        </div>
+        <div class="bestsellers__product-summary">
+          <span class="price">{{ product.price | money }}</span>
+          <h2 class="product-title">{{ product.title }}</h2>
+          <a class="bestsellers__add-to-cart-btn" href="#"><i data-feather="shopping-cart"></i> Add to cart</a>
+        </div>
+      </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+
+
+
+{% schema %}
+  {
+    "name": {
+      "en": "Bestsellters"
+    },
+    "settings":[
+      {
+        "type": "collection",
+        "id": "best_collection",
+        "label": {
+          "en": "Select a Collection"
+        }
+      }
+    ],
+    "presets": [
+      {
+        "name": "Bestsellters",
+        "category": "Home"
+      }
+    ]
+  }
+{% endschema %}

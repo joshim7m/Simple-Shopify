@@ -1,22 +1,51 @@
-{% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
-  </form>
+<div class="container mb-5">
+  {% paginate search.results by 10 %}
+  <div class="row py-5">
+   <div class="col-md-10 offset-1">
+      <form action="/search" method="get" role="search">
+        <input type="search" name="q" value="{{ search.terms | escape }}">
+        <button type="submit">search</button>
+      </form>
+   </div>
+  </div>
 
-  {% if search.performed %}
+  <div class="row">
+    {% if search.performed %}
     {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
-      {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+      <div class="col-md-4">
+        <div class="product-item">
+          <div class="product-thumb">
+            {% if product.compare_at_price and product.compare_at_price != product.price %}
+            <span class="bage">Sale</span>
+            {% endif %}
+            <img class="img-responsive" src="{{ item.featured_image.src | img_url: 'master' }}" alt="product-img">
+            <div class="preview-meta">
+              <ul>
+                <li>
+                  <a href="{{ item.url }}"><i class="fa fa-eye"></i></a>
+                </li>
+                <li>
+                  <form action="/cart/add" method="post" id="form-{{item.handle}}">
+                    <input type="hidden" name="id" value="{{item.variants.first.id}}">
+                  </form>
+                  <a onclick="document.getElementById('form-{{item.handle}}').submit()" ><i class="fa fa-shopping-cart"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="item-content">
+            <h4><a href="{{ item.url }}">{{ item.title }}</a></h4>
+            <p class="price">{{ item.price }}</p>
+          </div>
+        </div>
+      </div>
     {% else %}
       no results
     {% endfor %}
   {% endif %}
+  </div>
 
   {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
 {% endpaginate %}
+
+</div>

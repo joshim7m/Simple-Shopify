@@ -8,31 +8,60 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }} <!-- Header hook for plugins -->
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" >
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" >
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
 
 
   {{ 'application.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
 </head>
 <body>
 
+
+  {% section 'announcement-bar' %}
   {% section 'header' %}
+
+
+
+
+
+
+
+
+
 
   <main role="main">
     {{ content_for_layout }}
   </main>
 
+
+
+
+
+
+
+
+
+
+
     {% section 'footer' %}
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+
+
+
+
+
+   {{ 'jquery.min.js' | asset_url | script_tag }}
+   {{ 'bootstrap.min.js' | asset_url | script_tag }}
+   {{ 'feather.min.js' | asset_url | script_tag }}
+   {{ 'slick.min.js' | asset_url | script_tag }}
    {{ 'application.js' | asset_url | script_tag }}
+
+   <script>
+    feather.replace()
+  </script>
 </body>
 </html>

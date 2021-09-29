@@ -1,0 +1,82 @@
+<section id="hero" class="hero" style="background-image: url('{{ section.settings.hero_bg | img_url: 'master'  }}');">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-md-6 col-lg-5">
+        <div class="hero__content">
+          <h1>{{ section.settings.title }}</h1>
+          {{ section.settings.content }}
+          <a href="{{ section.settings.url }}" class="btn btn-primary text-white uppercase hero-btn"><i data-feather="shopping-cart"></i> Shop Now</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-5">
+        <div class="hero__video-box">
+    <!--  <div class="hero__video">
+          <video loop muted class="video_background">
+            <source src="assets/shop-video.mp4" type="video/mp4">
+          </video>
+        </div> -->
+        <div class="iframe-container">
+          <iframe src="https://www.youtube.com/embed/fw-0xMobkCo?vq=hd1080&autoplay=1&rel=0&theme=light&controls=0" width="560" height="315" frameborder="0"></iframe>
+        </div>
+          <div class="hero__video-footer">Hello</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": {
+      "en": "Hero Section"
+    },
+    "settings":[
+    {
+      "type": "image_picker",
+      "id": "hero_bg",
+      "label": {
+        "en": "Background Image"
+      }
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Fresh products from Dokan with love",
+      "label": {
+        "en": "Title"
+      }
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "default": "<p>In Mama T’s Afro-Shop the family comes first. However, not only family Omorogbe, but all African families who are far away from their mother country and still want to feel at home in Germany.</p>",
+      "label": {
+        "en": "Content"
+      }
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "default": "/",
+      "label": {
+        "en": "Link"
+      }
+    },
+    {
+      "type": "video_url",
+      "id": "shop_video",
+      "label": "Shop Video",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}
