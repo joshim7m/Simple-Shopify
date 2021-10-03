@@ -1,9 +1,10 @@
-<section class="cart-area section" style="min-height: 55vh;">
+<section class="cart-area section" style="min-height: 55vh; padding-top: 150px;">
   <div class="cart shopping">
     <div class="container">
       <div class="row">
-        {% if cart.item_count > 0 %}
-        <div class="col-md-10 offset-1">
+
+        <template v-if="cart">
+          <div class="col-md-10 offset-1">
           <div class="block">
             <div class="product-list">
               <form method="post">
@@ -52,11 +53,8 @@
             </div>
           </div>
         </div>
-        {% else %}
-        <div class="col-md-10 offset-1">
-          <h4 class="text-center">No Item</h4>
-        </div>
-        {% endif %}
+        </template>
+
       </div>
     </div>
   </div>

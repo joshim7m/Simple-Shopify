@@ -1,34 +1,23 @@
+{% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
 
-<form action="/cart/add" method="post">
- {% unless product.has_only_default_variant %}
-
-    {% for product_option in product.options_with_values %}
-      <div class="product-category">
-        <span>{{ product_option.name }}</span>
-        <select class="form-control" data-index="option{{ forloop.index }}">
-          {% for value in product_option.values %}
-            <option value="{{ value | escape }}" {% if product_option.selected.value == value %} selected="selected" {% endif %}>
-              {{value}}
-            </option>
-          {% endfor %}
-        </select>
-      </div>
+ <div class="variations">
+  <select name="id" id="variant_id" v-model="form.id" class="form-control">
+    {% for variant in product.variants %}
+      <option
+        {% if variant == product.current_variant %}selected="selected"{% endif %}
+        value="{{ variant.id }}">
+          {{ variant.title }}
+      </option>
     {% endfor %}
-  {% endunless %}
+  </select>
+</div>
 
-  <div class="product-quantity">
-    <span>Quantity:</span>
-    <input min="1" type="number" id="quantity" name="quantity" value="1" />
-  </div>
-  <div class="product-category">
-    <span>Categories:</span>
-    <ul>
-      {% for collection in product.collections %}
-        <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-  
-  <input type="hidden" id="variant-id" name="id" value="{{ product.variants.first.id }}">
-  <input type="submit" class="btn btn-main" value="Add to Cart">
-</form>
+<div class="submission-box">
+
+  <h4 class="price">$32.99</h4>
+   <input type="number" class="form-control" v-model="form.quantity" min="1">
+  <a class="add-to-cart-btn" href="#" @click="addToCart">
+    <i data-feather="shopping-cart"></i> Add to cart</a>
+
+</div>
+{% endform %}
