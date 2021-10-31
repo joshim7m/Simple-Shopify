@@ -21,3 +21,38 @@
 
 </div>
 {% endform %}
+
+
+<script>
+  if(document.querySelector('.shopify-product-form')){
+    
+
+    const productForm = Vue.createApp({
+      delimiters: ['${', '}'],
+      data(){
+        return {
+          form: {
+            id: {{ product.first_available_variant.id }},
+            quantity: 1,
+          }
+        }
+      },
+
+      methods: {
+        addToCart(){
+          axios.post('/cart/add.js', this.form)
+          .then(response => {
+            store.getCart()
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        }
+
+      }
+
+
+
+    }).mount('.shopify-product-form');
+  }
+</script>

@@ -8,8 +8,6 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }} <!-- Header hook for plugins -->
-  {%- if settings.favicon != blank -%}
-
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@3.0.5"></script>
@@ -17,6 +15,9 @@
 
   {{ 'application.css' | asset_url | stylesheet_tag }}
   {{ 'slick.css' | asset_url | stylesheet_tag }}
+  
+  {{ 'jquery.min.js' | asset_url | script_tag }}
+  {{ 'application.js' | asset_url | script_tag }}
 </head>
 <body>
 
@@ -27,44 +28,20 @@
 
 
 
-
-
-
-
-
-
   <main role="main">
     {{ content_for_layout }}
   </main>
-
-
-
-
-
-
-
-
-
 
 
     {% section 'footer' %}
 
 
 
-
-
-
-
-
-   {{ 'jquery.min.js' | asset_url | script_tag }}
    {{ 'bootstrap.min.js' | asset_url | script_tag }}
    {{ 'feather.min.js' | asset_url | script_tag }}
    {{ 'slick.min.js' | asset_url | script_tag }}
-
-   {{ 'productForm.js' | asset_url | script_tag }}
-   {{ 'cartForm.js' | asset_url | script_tag }}
    
-   {{ 'application.js' | asset_url | script_tag }}
+
 
    <script>
     feather.replace()

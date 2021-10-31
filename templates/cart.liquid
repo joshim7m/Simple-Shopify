@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
 
-        <template v-if="cart">
+        <template v-if="cart && cart.items.length > 0">
           <div class="col-md-10 offset-1">
           <div class="block">
             <div class="product-list">
@@ -19,23 +19,23 @@
                   </thead>
                   <tbody>
 
-                    {% for item in cart.items %}
-                    <tr>
+                    <template v-for="item in cart.items">
+                      <tr>
                       <td>
-                        <div class="product-info">
-                          <img width="80" src="{{ item.image | product_img_url: 'master' }}" alt="">
-                          <a href="{{ item.url }}">{{ item.title }}</a>
+                        <div class="product-info" v-if="item.image">
+                          <img width="80" :src="item.image" alt="" style="margin-right: 5px;">
+                          <a :href="item.url">${ item.title }</a>
                         </div>
                       </td>
                       <td width="100">
-                        <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" pattern="[0-9]" class="form-control">
+                        <input type="number" v-model="item.quantity" class="form-control">
                       </td>
-                      <td>{{ item.price | money }}</td>
+                      <td>${ item.price }</td>
                       <td>
-                        <a class="product-remove" href="/cart/change?line={{forloop.index}}&quantity=0" rel="{{item.id}}">Remove</a>
+                        <button type="button" class="product-remove" @click="removeCart(item)" >Remove</button>
                       </td>
                     </tr>
-                    {% endfor %}
+                    </template>
 
                   </tbody>
                 </table>
@@ -44,18 +44,85 @@
                     Total
                   </div>
                   <div class="col-md-2">
-                   {{ cart.total_price | money }}
+                   ${cart.total_price}
                   </div>
                 </div>
                 <input type="submit" name="checkout" class="btn btn-main pull-right" value="checkout">
-                <input type="submit" name="update" id="update-btn" class="btn btn-transparent pull-right" value="Update">
               </form>
             </div>
           </div>
         </div>
+        </template>
+        <template v-else>
+          <p class="cart-empty">Cart is empty</p>
         </template>
 
       </div>
     </div>
   </div>
 </section>
+
+
+<script>
+  if(document.querySelector('.cart-area')){
+    const cartForm = Vue.createApp({
+      delimiters: ['${', '}'],
+      data(){
+        return {
+         cartData: store.state.cartState
+        }
+      },
+
+      created(){
+        this.getCart()
+      },
+
+     computed: {
+      cart(){
+        return this.cartData[0]
+      }
+     },
+
+      methods: {
+
+        getCart(){
+          axios.get('/cart.js')
+          .then(response =>{
+            this.cart = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        },
+        removeCart(item){
+          const data = {
+            'id': item.key,
+            'quantity': 0
+          }
+          axios.post('/cart/change.js', data)
+          .then(response => {
+            store.getCart()
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        },
+        updateCart(){
+          let result = this.cart.items.reduce(
+               (accumulator, target) => ({ ...accumulator, [target.variant_id]: target.quantity }),
+          {});
+          console.log(result);
+
+          axios.post('/cart/update.js', {updates : result} )
+            .then( (response) => {
+                
+            })
+            .catch(function (error) {
+
+            });
+        },
+      }
+
+    }).mount('.cart-area');
+  }
+</script>

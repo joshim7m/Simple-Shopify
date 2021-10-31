@@ -1,0 +1,45 @@
+<div class="cartDrawer__header">
+  <h4>Search for products</h4>
+  <i id="cartDrawer-close" data-feather="x"></i>
+</div>
+<div class="cartDrawer__body">
+  <template v-if="cart && cart.items.length > 0">
+    <div class="cart-row">
+      <div class="item-wrapper">
+        <div class="cart-item" v-for="item in cart.items">
+          <div class="image-wrapper" v-if="item.image">
+            <img class="img-fluid" :src="item.image" alt="item.title">
+          </div>
+          <div class="cart-summary">
+            <div class="summary-content">
+              <h6><a :href="item.url">${item.title}</a></h6>
+              <h6>${item.price}</h6>
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" id="decrement" @click="decrement(item)">
+                <span class="input-group-text">-</span>
+              </div>
+              <input type="text" v-model="item.quantity" class="form-control">
+              <div class="input-group-append" id="increment" @click="increment(item)">
+                <span class="input-group-text">+</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="cart-bottom">
+        <span>Subtotal: </span>
+        <span>${cart.total_price}</span>
+      </div>
+    </div>
+  </template>
+  <template v-else>
+    <p class="cart-empty">Cart is empty</p>
+  </template>
+</div>
+<div class="cartDrawer__footer"  v-if="cart && cart.items.length > 0">
+ <a href="/checkout">Checkout</a>
+</div>
+

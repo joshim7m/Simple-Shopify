@@ -63,7 +63,10 @@
             <i data-feather="user"></i>
           </a>
           <a id="cartDrawer-trigger" class="d-none d-lg-block" href="javascript:void(0)">
-            <i data-feather="shopping-bag"></i> 0 
+            <i data-feather="shopping-bag"></i> 
+            <template v-if="cart">
+               ${cart.item_count}
+             </template>
           </a>
         </div>
       </div>
@@ -89,16 +92,7 @@
 <!--     ECOMMERCE CART DRAWER -->
 
     <div class="cartDrawer">
-      <div class="cartDrawer__header">
-        <h4>Search for products</h4>
-        <i id="cartDrawer-close" data-feather="x"></i>
-      </div>
-      <div class="cartDrawer__body">
-        <h4>Cart Item</h4>
-      </div>
-      <div class="cartDrawer__footer">
-        <p>cart footer</p>
-      </div>
+      {% render 'mini-cart' %}
     </div>
 
   </div>
@@ -122,3 +116,62 @@
   ]
 }
 {% endschema %}
+
+
+<script>
+if(document.querySelector('#header')){
+  const headerCart = Vue.createApp({
+  
+  delimiters: ['${', '}'],
+
+   data() {
+    return {
+      cartData: store.state.cartState
+    }
+   },
+   created(){
+      store.getCart();
+    },
+
+   methods: {
+    decrement(item){
+      const data = {
+        'id': item.key,
+        'quantity': item.quantity - 1
+      }
+      axios.post('/cart/change.js', data)
+      .then(response => {
+        store.getCart()
+      })
+      .catch(error => console.log(error))
+    },
+    increment(item){
+      const data = {
+        'id': item.key,
+        'quantity': item.quantity + 1
+      }
+      axios.post('/cart/change.js', data)
+      .then(response => {
+        store.getCart()
+      })
+      .catch(error => console.log(error))
+    },
+
+   },
+
+   computed: {
+    miniCart(){
+      return miniCartState.hidden
+    },
+    menuDrawer(){
+      return menuState.hidden
+    },
+    cart(){
+      return this.cartData[0]
+    }
+   }
+
+
+  }).mount('#header');
+}  
+</script>
